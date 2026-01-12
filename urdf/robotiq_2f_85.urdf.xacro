@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot name="robotiq_2f_85" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- ================= BASE / ADAPTER ================= -->
+
+  <link name="robotiq_85_adapter_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://fanuc_description/meshes/lbr_iiwa_14_r820/robotiq_2f_85/visual/robotiq_85_gripper_adapter_plate.dae"/>
+      </geometry>
+      <origin rpy="1.5707 0 1.5707" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <joint name="robotiq_85_base_joint" type="fixed">
+    <parent link="robotiq_85_adapter_link"/>
+    <child link="robotiq_85_base_link"/>
+    <origin xyz="0.0085 0 -0.0041" rpy="0 0 0"/>
+  </joint>
+
+  <link name="robotiq_85_base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://fanuc_description/meshes/lbr_iiwa_14_r820/robotiq_2f_85/visual/robotiq_85_gripper_base.dae"/>
+      </geometry>
+      <origin rpy="3.1415 0 1.5707" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <!-- ================= MAIN ACTUATED JOINT ================= -->
+
+  <joint name="robotiq_85_left_knuckle_joint" type="fixed">
+    <parent link="robotiq_85_base_link"/>
+    <child link="robotiq_85_left_knuckle_link"/>
+    <origin xyz="0.04191 0.0306 0" rpy="-1.5707 1.5707 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="0" upper="0.8575" velocity="2.0"/>
+  </joint>
+
+  <joint name="robotiq_85_right_knuckle_joint" type="fixed">
+    <parent link="robotiq_85_base_link"/>
+    <child link="robotiq_85_right_knuckle_link"/>
+    <origin xyz="0.04191 -0.0306 0" rpy="1.5707 -1.5707 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000" lower="0" upper="1.5707" velocity="2.0"/>
+    <mimic joint="robotiq_85_left_knuckle_joint"/>
+  </joint>
+
+  <!-- ================= LINKS ================= -->
+
+  <link name="robotiq_85_left_knuckle_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://fanuc_description/meshes/lbr_iiwa_14_r820/robotiq_2f_85/visual/robotiq_85_gripper_joint_0_L.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="robotiq_85_right_knuckle_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://fanuc_description/meshes/lbr_iiwa_14_r820/robotiq_2f_85/visual/robotiq_85_gripper_joint_0_R.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+</robot>
